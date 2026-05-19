@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atheneum AI | Offline Learning &amp; Sync</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#44ddc1",
+                        "on-secondary-fixed": "#22005d",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#68fadd",
+                        "on-primary-container": "#ccd8ff",
+                        "surface-tint": "#0056d2",
+                        "on-primary-fixed-variant": "#0040a1",
+                        "on-tertiary-fixed-variant": "#005145",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-container": "#7531ff",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary": "#5b00df",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#5300cd",
+                        "on-secondary-container": "#eadfff",
+                        "primary": "#0040a1",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed": "#001847",
+                        "surface-container": "#edeeef",
+                        "on-background": "#191c1d",
+                        "on-tertiary-container": "#5cf0d4",
+                        "tertiary-container": "#006b5c",
+                        "on-tertiary-fixed": "#00201a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-dim": "#d9dadb",
+                        "outline": "#737785",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d6",
+                        "tertiary": "#005145",
+                        "on-surface": "#191c1d",
+                        "secondary-fixed-dim": "#cfbdff",
+                        "inverse-primary": "#b2c5ff",
+                        "primary-container": "#0056d2",
+                        "surface": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed": "#e8ddff",
+                        "primary-fixed": "#dae2ff",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#424654",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-only {
+            background-color: #f3f4f5;
+        }
+    </style>
+
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navbar (Updated with Home link) -->
+<nav class="w-full sticky top-0 z-40 bg-surface-container-lowest shadow-sm font-['Manrope'] tracking-tight">
+<div class="flex justify-between items-center px-4 sm:px-8 h-16 w-full max-w-[1440px] mx-auto">
+  <div class="flex items-center gap-3">
+    <a href="../index.html" class="text-xl font-bold text-primary hover:opacity-80 transition">Trang chủ</a>
+    <div class="text-xl font-bold text-primary">Scholar Tech</div>
+  </div>
+  <div class="hidden md:flex gap-8 items-center">
+    <a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html">Trang chủ</a>
+    <a class="text-on-surface-variant hover:text-primary" href="#">Dashboard</a>
+    <a class="text-on-surface-variant hover:text-primary" href="#">Courses</a>
+    <a class="text-on-surface-variant hover:text-primary" href="#">Resources</a>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="p-2 hover:bg-surface-container transition rounded-full">
+      <span class="material-symbols-outlined text-primary">notifications</span>
+    </button>
+    <button class="p-2 hover:bg-surface-container transition rounded-full">
+      <span class="material-symbols-outlined text-primary">settings</span>
+    </button>
+    <img alt="Profile" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJxWlf35sRVz8gihbdIGSYQBx8XEzczgehBLEYBic3bBu7ss42uZqMr3juStiPghjIsPhENQckc9Sbs_PyucvCXEpNUqqfsMP0d8Q-QYSSgl0j0gjqjEw9uI_IuyXyIf5pvCTAoCzCTjQmFW3HzWmqhYSlM6jC3dTil5OJyZNe2ADZs7YgyH1G-9-E4omHR-vofa1LKCmZVteJX6MJQl7wgIxEEnfiQowVIEA0WSxq0z6l2YZSombFuQNoT3DN507uXXaOPpib-Lk"/>
+  </div>
+</div>
+</nav>
+
+<!-- Sidebar (common structure) -->
+<aside id="sidebar" class="hidden lg:block h-screen w-64 fixed left-0 top-16 bg-surface-container-low shadow-[30px_0_50px_rgba(0,0,0,0.04)] z-30">
+  <div class="flex flex-col py-6 pr-4 h-full font-['Inter'] text-sm">
+    <div class="px-6 mb-8">
+      <h2 class="text-lg font-extrabold text-primary">Academic Atheneum</h2>
+      <p class="text-xs text-on-surface-variant">Offline Learning</p>
+    </div>
+    <nav class="space-y-1 flex-1">
+      <a class="flex items-center gap-3 px-6 py-3 hover:bg-surface-container hover:translate-x-1 transition text-on-surface-variant" href="#">
+        <span class="material-symbols-outlined">dashboard</span> Overview
+      </a>
+      <a class="flex items-center gap-3 px-6 py-3 bg-primary-fixed text-primary font-semibold rounded-r-full" href="#">
+        <span class="material-symbols-outlined">leaderboard</span> Leaderboard
+      </a>
+      <!-- More sidebar links -->
+    </nav>
+  </div>
+</aside>
+
+<div id="spacer" class="lg:ml-64 h-16 lg:h-0"></div>
+
+<script>
+// Highlight current page if data-page set
+</script>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl shadow-sm md:relative md:bg-transparent md:shadow-none md:backdrop-blur-none">
+<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black tracking-tighter text-blue-900 font-headline">Atheneum AI</span>
+</div>
+<div class="hidden lg:flex gap-8">
+<a class="text-slate-500 hover:text-blue-600 transition-colors font-manrope font-semibold" href="#">Curriculum</a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors font-manrope font-semibold" href="#">Library</a>
+<a class="text-slate-500 hover:text-blue-600 transition-colors font-manrope font-semibold" href="#">Research</a>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500 p-2 cursor-pointer hover:bg-slate-100 rounded-full" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-blue-700 p-2 cursor-pointer bg-blue-50 rounded-full" data-icon="offline_pin">offline_pin</span>
+<img alt="Scholar profile avatar" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" data-alt="portrait of a focused young student with glasses in a modern library setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN0Q3vURoKvrx78G1CfzsG19PilET7RdmAb5qxasg9fNR2Fply2Bg1lP-9ihNSC_kyHp7_-4nxgg9rE4wS1tMxy4K06kemI3ZWun7Q6os2TFZyDJUdE6m7hLjZZo0mASsNDIi6I1H83XcaRdnF26keuNGH533G6GCPXqz2JZ7aNyE2xEDhJj36_za0QEYdba6Lwjkl4ZepD9sqJZktsaxYQv_0II0fNSqzuJiSLTL9BAFG5Ba5quXDPrwbFbYZQNGNefxW7SCStjE"/>
+</div>
+</div>
+<div class="h-[1px] bg-slate-200/50 w-full"></div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 md:pt-12 px-6 max-w-7xl mx-auto">
+<!-- Page Header / Hero -->
+<div class="mb-8 bg-blue-50 border-l-4 border-primary p-4 rounded-r-xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<div>
+<p class="font-headline font-bold text-sm text-primary">Nội dung mới sẵn sàng</p>
+<p class="text-xs text-on-surface-variant">Bài giảng mới về 'Kiến trúc Bền vững' đã sẵn sàng để tải xuống.</p>
+</div>
+</div>
+<button class="text-xs font-bold text-primary hover:underline uppercase tracking-wider">Tải ngay</button>
+</div><div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<h1 class="font-headline font-extrabold text-4xl text-on-surface tracking-tight">Offline Center</h1>
+<p class="text-on-surface-variant max-w-lg">Manage your curriculum downloads and synchronization. Keep learning even without an internet connection.</p>
+</div>
+<button class="bg-primary text-white px-6 py-3 rounded-xl font-headline font-bold flex items-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                    Nút Tải xuống
+                </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Storage Management (Bento Small) -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline font-bold text-on-surface">Quản lý Bộ nhớ</h3>
+<span class="material-symbols-outlined text-primary" data-icon="storage">storage</span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between text-sm font-medium">
+<span class="text-on-surface-variant">Storage Used</span>
+<span class="text-primary font-bold">12.4 GB / 64 GB</span>
+</div>
+<div class="h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 20%"></div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-2">
+<div class="p-3 bg-surface-container-low rounded-xl">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Videos</p>
+<p class="text-lg font-bold text-on-surface">8.2 GB</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Resources</p>
+<p class="text-lg font-bold text-on-surface">4.2 GB</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sync Status (Bento Small) -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10 overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="font-headline font-bold text-on-surface mb-4">Trạng thái Đồng bộ</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 bg-tertiary-fixed/20 rounded-xl">
+<span class="material-symbols-outlined text-tertiary" data-icon="check_circle" data-weight="fill">check_circle</span>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-tertiary-fixed-variant">Đã tải xong</p>
+<p class="text-xs text-tertiary">Progress: 100%</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-primary-fixed/50 rounded-xl">
+<span class="material-symbols-outlined text-primary animate-pulse" data-icon="sync">sync</span>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-primary-fixed-variant">Đang tải 45%</p>
+<div class="mt-1 h-1.5 bg-white/50 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-high rounded-xl">
+<span class="material-symbols-outlined text-outline" data-icon="schedule">schedule</span>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface">Chờ đồng bộ</p>
+<p class="text-xs text-on-surface-variant">2 files remaining</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/10">
+<h3 class="font-headline font-bold text-on-surface mb-4">Nhắc nhở Đồng bộ</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<p class="text-sm font-bold text-on-surface">Thông báo nội dung mới</p>
+<p class="text-xs text-on-surface-variant">Nhắc tôi khi có bài học mới</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<p class="text-sm font-bold text-on-surface">Nhắc nhở đồng bộ chờ</p>
+<p class="text-xs text-on-surface-variant">Thông báo khi có tệp chưa đồng bộ</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div></div>
+<!-- Offline Lessons List (Bento Large) -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-6 rounded-3xl shadow-sm border border-outline-variant/10">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface">Danh sách Bài học Ngoại tuyến</h3>
+<p class="text-sm text-on-surface-variant">Access your saved materials without data.</p>
+</div>
+<div class="flex gap-2 w-full sm:w-auto">
+<div class="flex-1 sm:flex-initial relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-surface-container-highest rounded-full border-none text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search offline contents..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Lesson Items -->
+<div class="space-y-2">
+<!-- Item 1 -->
+<div class="group flex items-center gap-4 p-4 hover:bg-primary-fixed/30 rounded-2xl transition-all cursor-pointer">
+<div class="w-20 h-14 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 relative">
+<img alt="Course Thumbnail" class="w-full h-full object-cover" data-alt="Modern architectural rendering of a skyscraper with glass facade at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz2B-ItXaZSa3wJr7sTCHb8ok5vt9Z-Nxpfk9-jj-Wk3Yc01RyoTb66swVv5uBsh4o6XIBz-7OEE7aI10QNEDFtKiS-iiTRyMBC_bY4g6qQN1eN8nPqDx_jI8iVGmZvuMU-GaPMi0x7QP2gUwro7JpbyZCenU13dT72yFx5cl1cdOQJlUBB-Ae8HidQvUuAriKGZIg27FIY7E8sYqREQ1ewcKmN-wJXGsaeh5MWVmCytovg4y23GRY0ztdnJIO7kwF7uMtaCQToN8"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" data-icon="play_circle" data-weight="fill">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface truncate">Architectural Dynamics: Vol 1</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">movie</span> 45:12 min
+                                    </span>
+<span class="text-xs text-primary font-bold bg-primary-fixed px-2 py-0.5 rounded-full">1.2 GB</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="cloud_done">cloud_done</span>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group flex items-center gap-4 p-4 hover:bg-primary-fixed/30 rounded-2xl transition-all cursor-pointer">
+<div class="w-20 h-14 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 relative">
+<img alt="Course Thumbnail" class="w-full h-full object-cover" data-alt="Student collaborative workspace with laptops and large windows showing urban landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaGHLQOSc00eb2nNR2Pla7u09R1rp-oc878__K3-P1VyZGOginflqgUCBJTqKnDgR19wOiC3Xw5-C1rCSgMIQZtN1LE08wShzRzAPbp6Rq83c56GlcWrhQdKL6lk8dbIl3dbsryly2gORkWDEYjRFOKJTy-cnsDgjY59DfmgUwO3uue3-b32MOIeXTFD_Q4EbnROHUjfImvaPdprR8e4NmHxfvJFeisWDvNxxS4yWhKrOf19j-re1yREcAesLVJg_0FDYv7EKCokQ"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<div class="text-white font-bold text-[10px]">45%</div>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface truncate">Digital Urbanism &amp; Smart Cities</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">description</span> PDF • 24 Pages
+                                    </span>
+<span class="text-xs text-secondary font-bold bg-secondary-fixed px-2 py-0.5 rounded-full">85 MB</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary animate-spin" data-icon="sync">sync</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group flex items-center gap-4 p-4 hover:bg-primary-fixed/30 rounded-2xl transition-all cursor-pointer">
+<div class="w-20 h-14 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 relative">
+<img alt="Course Thumbnail" class="w-full h-full object-cover" data-alt="Brutalist concrete building details with strong geometric shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhGGO6fdSs0hi13lr5gnicWyXc7QSEg8YjTGY3C_HMDmlduk5JKLXwHEIlw0EyFiMWuosld2lCd-EVp1TxTbza4QgfgP0bi5CUBjtLuOF4xQrcQcKaie-jD5C8dWRFlrFPPilNhiviPfjJ3HJg3SXG3jbWUnuLb2iZ3mf8SRoFWhlF9lmnTcG6XFPL4618DpZ96JG8fVR_kiaby5lUbrpW7ZT9AKrP29KTgBhHaounX70cOVFweD0mVmg-G2vLyQX3o3Bs40Ey3v8"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" data-icon="play_circle" data-weight="fill">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface truncate">Theory of Minimalist Spaces</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">movie</span> 1:20:00
+                                    </span>
+<span class="text-xs text-primary font-bold bg-primary-fixed px-2 py-0.5 rounded-full">2.4 GB</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="cloud_done">cloud_done</span>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group flex items-center gap-4 p-4 hover:bg-primary-fixed/30 rounded-2xl transition-all cursor-pointer opacity-70">
+<div class="w-20 h-14 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">cloud_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface truncate">Sustainable Engineering Masterclass</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant">Waiting for Wi-Fi...</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400" data-icon="schedule">schedule</span>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="mt-8 pt-6 border-t border-slate-100 flex justify-center">
+<button class="text-primary font-headline font-bold text-sm hover:underline">View All 12 Downloads</button>
+</div>
+</div>
+</div>
+<!-- AI Insight Modal (Ghost/Glass) -->
+<div class="mt-12 bg-secondary-container/10 backdrop-blur-xl p-8 rounded-[2.5rem] border border-secondary/10 flex flex-col md:flex-row items-center gap-8">
+<div class="p-4 bg-white/80 rounded-3xl shadow-xl">
+<span class="material-symbols-outlined text-5xl text-secondary" data-icon="auto_awesome" data-weight="fill">auto_awesome</span>
+</div>
+<div class="flex-1 space-y-2 text-center md:text-left">
+<h2 class="font-headline font-extrabold text-2xl text-on-secondary-fixed">Smart Sync is Active</h2>
+<p class="text-on-secondary-fixed/70 text-sm max-w-xl">Atheneum AI has analyzed your curriculum schedule. We've pre-downloaded tomorrow's lecture "Future of Sustainable Glass" because we detected you'll be offline during your commute.</p>
+</div>
+<button class="bg-secondary text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-secondary/20">
+                    Review Queue
+                </button>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "Scholar Tech - Quản lý học tập",
+  "short_name": "ScholarTech",
+  "description": "Ứng dụng học tập toàn diện: quản lý lớp học, điểm số, tài liệu học liệu, chat thời gian thực. Hoạt động offline cơ bản và cài đặt như app native.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "categories": ["education", "productivity", "utilities"],
+  "orientation": "portrait-primary",
+  "lang": "vi-VN",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

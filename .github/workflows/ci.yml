@@ -1,0 +1,64 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Backend test
+      run: |
+        cd backend
+        npm ci
+        npm run lint --if-present
+        npm test
+
+    - name: Frontend test
+      run: |
+        cd frontend
+        npm ci
+        npm run lint --if-present
+        npm run build --if-present
+
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build & push backend
+      uses: docker/build-push-action@v6
+      with:
+        context: ./backend
+        push: true
+        tags: yourusername/scholar-tech-backend:latest
+
+    - name: Build & push frontend
+      uses: docker/build-push-action@v6
+      with:
+        context: ./frontend
+        push: true
+        tags: yourusername/scholar-tech-frontend:latest

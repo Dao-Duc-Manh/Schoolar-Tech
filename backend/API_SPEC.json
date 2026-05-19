@@ -1,0 +1,221 @@
+{
+  "info": {
+    "title": "Scholar Tech API",
+    "version": "1.0.0",
+    "description": "API para plataforma de gestão de aprendizado Scholar Tech"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Development server"
+    }
+  ],
+  "auth": {
+    "type": "JWT",
+    "header": "Authorization",
+    "scheme": "Bearer"
+  },
+  "endpoints": {
+    "auth": {
+      "register": {
+        "method": "POST",
+        "path": "/auth/register",
+        "description": "Registrar novo usuário",
+        "body": {
+          "fullName": "string, required",
+          "email": "string, required, unique",
+          "password": "string, required, min 6 chars",
+          "role": "string, optional (admin|teacher|student), default: student"
+        },
+        "response": {
+          "success": "boolean",
+          "data": {
+            "user": "object",
+            "token": "JWT token"
+          }
+        }
+      },
+      "login": {
+        "method": "POST",
+        "path": "/auth/login",
+        "description": "Fazer login",
+        "body": {
+          "email": "string, required",
+          "password": "string, required"
+        },
+        "response": {
+          "success": "boolean",
+          "data": {
+            "user": "object",
+            "token": "JWT token"
+          }
+        }
+      },
+      "getCurrentUser": {
+        "method": "GET",
+        "path": "/auth/me",
+        "description": "Obter usuário atual",
+        "auth": "required",
+        "response": {
+          "success": "boolean",
+          "data": "user object"
+        }
+      }
+    },
+    "classes": {
+      "create": {
+        "method": "POST",
+        "path": "/classes",
+        "description": "Criar nova classe",
+        "auth": "required (teacher|admin)",
+        "body": {
+          "name": "string, required",
+          "code": "string, required, unique",
+          "description": "string, optional",
+          "semester": "string, optional",
+          "capacity": "integer, optional, default: 50"
+        }
+      },
+      "list": {
+        "method": "GET",
+        "path": "/classes",
+        "description": "Listar todas as classes",
+        "auth": "required",
+        "query": {
+          "page": "integer, default: 1",
+          "limit": "integer, default: 10"
+        }
+      },
+      "get": {
+        "method": "GET",
+        "path": "/classes/:id",
+        "description": "Obter classe por ID",
+        "auth": "required"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/classes/:id",
+        "description": "Atualizar classe",
+        "auth": "required (owner|admin)",
+        "body": {
+          "name": "string, optional",
+          "description": "string, optional",
+          "semester": "string, optional",
+          "capacity": "integer, optional",
+          "status": "string, optional (active|inactive|archived)"
+        }
+      },
+      "delete": {
+        "method": "DELETE",
+        "path": "/classes/:id",
+        "description": "Deletar classe",
+        "auth": "required (owner|admin)"
+      }
+    },
+    "students": {
+      "enroll": {
+        "method": "POST",
+        "path": "/students/enroll",
+        "description": "Enrolar estudante em classe",
+        "auth": "required (teacher|admin)",
+        "body": {
+          "userId": "string (UUID), required",
+          "classId": "string (UUID), required"
+        }
+      },
+      "listByClass": {
+        "method": "GET",
+        "path": "/students/class/:classId",
+        "description": "Listar estudantes de uma classe",
+        "auth": "required",
+        "query": {
+          "page": "integer, default: 1",
+          "limit": "integer, default: 10"
+        }
+      },
+      "getProfile": {
+        "method": "GET",
+        "path": "/students/:studentId",
+        "description": "Obter perfil do estudante",
+        "auth": "required"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/students/:studentId",
+        "description": "Atualizar dados do estudante",
+        "auth": "required (teacher|admin)",
+        "body": {
+          "status": "string, optional (active|dropped|completed)",
+          "midtermGrade": "float, optional",
+          "finalGrade": "float, optional",
+          "attendance": "integer, optional"
+        }
+      }
+    },
+    "grades": {
+      "add": {
+        "method": "POST",
+        "path": "/grades",
+        "description": "Adicionar nota para estudante",
+        "auth": "required (teacher|admin)",
+        "body": {
+          "studentId": "string (UUID), required",
+          "assessmentName": "string, required",
+          "assessmentType": "string, optional (quiz|assignment|midterm|final)",
+          "score": "float, required",
+          "maxScore": "float, optional, default: 10",
+          "feedback": "string, optional"
+        }
+      },
+      "getByStudent": {
+        "method": "GET",
+        "path": "/grades/student/:studentId",
+        "description": "Obter notas de um estudante",
+        "auth": "required"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/grades/:gradeId",
+        "description": "Atualizar nota",
+        "auth": "required (teacher|admin)",
+        "body": {
+          "score": "float, optional",
+          "maxScore": "float, optional",
+          "feedback": "string, optional"
+        }
+      },
+      "getReport": {
+        "method": "GET",
+        "path": "/grades/report/class",
+        "description": "Gerar relatório de notas",
+        "auth": "required",
+        "query": {
+          "studentId": "string (UUID), optional",
+          "classId": "string (UUID), optional"
+        }
+      }
+    }
+  },
+  "errorCodes": {
+    "400": "Bad Request - Dados inválidos",
+    "401": "Unauthorized - Token inválido ou ausente",
+    "403": "Forbidden - Sem permissão",
+    "404": "Not Found - Recurso não encontrado",
+    "409": "Conflict - Recurso já existe",
+    "500": "Internal Server Error"
+  },
+  "roles": {
+    "admin": {
+      "permissions": ["create:class", "read:class", "update:class", "delete:class", "manage:users", "manage:grades"],
+      "description": "Administrador do sistema"
+    },
+    "teacher": {
+      "permissions": ["create:class", "read:class", "update:class", "enroll:student", "add:grade", "read:grade"],
+      "description": "Professor/Instrutor"
+    },
+    "student": {
+      "permissions": ["read:class", "read:grade", "read:document"],
+      "description": "Aluno/Estudante"
+    }
+  }
+}

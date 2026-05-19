@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+
+# Runtime
+.DS_Store
+.nyc_output
+coverage
+
+# Docker
+Dockerfile.*.tmp
+.dockerignore
+
+# Uploads
+**/uploads/**/*
+!.gitkeep
+
+# IDE
+.vscode/settings.json
+.idea
+
+# OS
+Thumbs.db

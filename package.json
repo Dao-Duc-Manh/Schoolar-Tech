@@ -1,0 +1,31 @@
+{
+  "name": "code-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cron": "^4.4.0",
+    "express-rate-limit": "^8.3.2",
+    "helmet": "^8.1.0",
+    "nodemailer": "^8.0.5",
+    "pdfkit": "^0.18.0",
+    "redis": "^5.12.1",
+    "sharp": "^0.34.5",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "@sinonjs/fake-timers": "^15.3.2",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.3.0",
+    "nock": "^14.0.12",
+    "sinon": "^21.1.2",
+    "supertest": "^7.2.2"
+  }
+}

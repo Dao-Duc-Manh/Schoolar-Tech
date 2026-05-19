@@ -1,0 +1,324 @@
+{
+  "faculties": [
+    {
+      "id": "faculty_it",
+      "name": "Khoa Công nghệ thông tin",
+      "description": "Đào tạo kỹ sư công nghệ thông tin Trường Đại Nam"
+    }
+  ],
+  "majors": [
+    {
+      "id": "major_it",
+      "facultyId": "faculty_it",
+      "name": "Công nghệ thông tin",
+      "description": "Phát triển phần mềm, dữ liệu và AI"
+    }
+  ],
+  "semesters": [
+    {
+      "id": "sem_2025_1",
+      "name": "HK1 2025-2026",
+      "startDate": "2025-09-01",
+      "endDate": "2026-01-15",
+      "status": "active"
+    }
+  ],
+  "courses": [
+    {
+      "id": "course_web301",
+      "courseCode": "WEB301",
+      "name": "Lập trình Web",
+      "credits": 3,
+      "facultyId": "faculty_it",
+      "majorId": "major_it",
+      "description": "Xây dựng ứng dụng web hiện đại với React và API.",
+      "learningOutcomes": [
+        "Thiết kế UI responsive",
+        "Tích hợp REST API",
+        "Quản lý state frontend"
+      ]
+    },
+    {
+      "id": "course_db301",
+      "courseCode": "DB301",
+      "name": "Cơ sở dữ liệu",
+      "credits": 3,
+      "facultyId": "faculty_it",
+      "majorId": "major_it",
+      "description": "Thiết kế CSDL quan hệ, SQL và tối ưu truy vấn.",
+      "learningOutcomes": [
+        "Thiết kế ERD",
+        "Viết SQL",
+        "Chuẩn hóa dữ liệu"
+      ]
+    },
+    {
+      "id": "course_ai202",
+      "courseCode": "AI202",
+      "name": "Nhập môn Trí tuệ nhân tạo",
+      "credits": 3,
+      "facultyId": "faculty_it",
+      "majorId": "major_it",
+      "description": "Nền tảng AI, machine learning và ứng dụng trong giáo dục.",
+      "learningOutcomes": [
+        "Hiểu thuật toán AI cơ bản",
+        "Ứng dụng AI hỗ trợ học tập"
+      ]
+    }
+  ],
+  "courseClasses": [
+    {
+      "id": "cc_web301_k16",
+      "courseId": "course_web301",
+      "classId": "class-1",
+      "teacherId": "u_lecturer_1",
+      "semesterId": "sem_2025_1",
+      "studentIds": [
+        "u_student_1",
+        "u_student_legacy"
+      ]
+    },
+    {
+      "id": "cc_db301_k16",
+      "courseId": "course_db301",
+      "classId": "class-1",
+      "teacherId": "u_lecturer_1",
+      "semesterId": "sem_2025_1",
+      "studentIds": [
+        "u_student_1"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson_web_1",
+      "courseId": "course_web301",
+      "title": "React Component và Props",
+      "content": "Component giúp chia UI thành các khối tái sử dụng.",
+      "videoUrl": "https://example.com/react-components",
+      "documentUrl": "/uploads/sample-react.pdf",
+      "orderIndex": 1
+    },
+    {
+      "id": "lesson_web_2",
+      "courseId": "course_web301",
+      "title": "API Integration với Axios",
+      "content": "Gọi REST API, xử lý loading/error và bảo mật token.",
+      "videoUrl": "https://example.com/api-integration",
+      "documentUrl": "/uploads/sample-api.pdf",
+      "orderIndex": 2
+    },
+    {
+      "id": "lesson_db_1",
+      "courseId": "course_db301",
+      "title": "SELECT, JOIN, GROUP BY",
+      "content": "Truy vấn dữ liệu quan hệ và tổng hợp kết quả.",
+      "videoUrl": "https://example.com/sql",
+      "documentUrl": "/uploads/sample-sql.pdf",
+      "orderIndex": 1
+    }
+  ],
+  "lessonProgress": [
+    {
+      "id": "progress_web_1",
+      "studentId": "u_student_1",
+      "lessonId": "lesson_web_1",
+      "status": "completed",
+      "progressPercent": 100,
+      "timeSpent": 42,
+      "completedAt": "2026-04-24T15:32:42.853Z"
+    },
+    {
+      "id": "progress_web_2",
+      "studentId": "u_student_1",
+      "lessonId": "lesson_web_2",
+      "status": "in_progress",
+      "progressPercent": 45,
+      "timeSpent": 18,
+      "completedAt": null
+    }
+  ],
+  "assignments": [
+    {
+      "id": "assign_web_quiz_1",
+      "courseClassId": "cc_web301_k16",
+      "title": "Quiz React Component",
+      "type": "quiz",
+      "description": "Kiểm tra nhanh về component, props và state.",
+      "startTime": "2026-04-01T00:00:00.000Z",
+      "endTime": "2026-05-30T23:59:59.000Z",
+      "duration": 30,
+      "maxScore": 10,
+      "weight": 0.2,
+      "status": "open"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_web_1",
+      "assignmentId": "assign_web_quiz_1",
+      "questionText": "Props trong React dùng để làm gì?",
+      "questionType": "multiple_choice",
+      "options": [
+        "Truyền dữ liệu vào component",
+        "Kết nối database",
+        "Build production",
+        "Tạo server"
+      ],
+      "correctAnswer": "Truyền dữ liệu vào component",
+      "score": 5
+    },
+    {
+      "id": "q_web_2",
+      "assignmentId": "assign_web_quiz_1",
+      "questionText": "Hook nào quản lý state cục bộ?",
+      "questionType": "multiple_choice",
+      "options": [
+        "useState",
+        "useRouter",
+        "useDb",
+        "useServer"
+      ],
+      "correctAnswer": "useState",
+      "score": 5
+    }
+  ],
+  "submissions": [],
+  "answers": [],
+  "grades": [
+    {
+      "id": "grade_web_student1",
+      "studentId": "u_student_1",
+      "courseId": "course_web301",
+      "semesterId": "sem_2025_1",
+      "attendanceScore": 8.5,
+      "assignmentScore": 7.2,
+      "midtermScore": 6.4,
+      "finalScore": 6.8,
+      "practiceScore": 8,
+      "weights": {
+        "attendanceScore": 0.1,
+        "assignmentScore": 0.2,
+        "midtermScore": 0.3,
+        "finalScore": 0.4
+      },
+      "isLocked": false,
+      "totalScore": 6.9,
+      "letterGrade": "C+",
+      "status": "Đạt"
+    },
+    {
+      "id": "grade_db_student1",
+      "studentId": "u_student_1",
+      "courseId": "course_db301",
+      "semesterId": "sem_2025_1",
+      "attendanceScore": 8,
+      "assignmentScore": 5.8,
+      "midtermScore": 5.2,
+      "finalScore": 5.6,
+      "practiceScore": 6,
+      "weights": {
+        "attendanceScore": 0.1,
+        "assignmentScore": 0.2,
+        "midtermScore": 0.3,
+        "finalScore": 0.4
+      },
+      "isLocked": false,
+      "totalScore": 5.8,
+      "letterGrade": "C",
+      "status": "Đạt"
+    }
+  ],
+  "gradeHistories": [],
+  "certificates": [],
+  "achievements": [],
+  "studentProfiles": [
+    {
+      "id": "profile_student1",
+      "studentId": "u_student_1",
+      "careerObjective": "Trở thành Frontend Developer trong lĩnh vực edtech.",
+      "aiSummary": "",
+      "skills": [
+        "React",
+        "SQL",
+        "Teamwork"
+      ],
+      "publicVisibility": false,
+      "showGpa": true,
+      "updatedAt": "2026-04-24T15:32:42.853Z"
+    }
+  ],
+  "aiLogs": [
+    {
+      "id": "ai_log_1778750597410_jf1ees",
+      "userId": "u_student_1",
+      "prompt": "Tôi nên ôn gì trong tuần này?",
+      "response": "AI Đại Nam: Với câu hỏi \"Tôi nên ôn gì trong tuần này?\", mình gợi ý bạn liên hệ lại dữ liệu học tập hiện tại. GPA của bạn là 2.56/4.0. Dựa trên kết quả môn Cơ sở dữ liệu, bạn nên ôn lại các bài nền tảng và làm thêm quiz luyện tập trong tuần này.",
+      "featureType": "student_chat",
+      "createdAt": "2026-05-14T09:23:17.410Z"
+    },
+    {
+      "id": "ai_log_1777047738804_mbw25e",
+      "userId": "u_lecturer_1",
+      "prompt": "analyze-student:u_student_1",
+      "response": "Sinh viên Nguyễn Văn A có 1 môn cần hỗ trợ. Tiến độ thấp nhất 0%, điểm trung bình hiện tại 6.4.",
+      "featureType": "teacher_student_analysis",
+      "createdAt": "2026-04-24T16:22:18.804Z"
+    },
+    {
+      "id": "ai_log_1777046266703_a8a435",
+      "userId": "u_lecturer_1",
+      "prompt": "class-analysis:cc_web301_k16",
+      "response": "AI phát hiện 1/2 sinh viên có nguy cơ điểm thấp. Nên ôn lại các chủ đề có quiz dưới 70%.",
+      "featureType": "teacher_class_analysis",
+      "createdAt": "2026-04-24T15:57:46.703Z"
+    },
+    {
+      "id": "ai_log_1777046266693_wnp2f7",
+      "userId": "u_lecturer_1",
+      "prompt": "class-analysis:cc_web301_k16",
+      "response": "AI phát hiện 1/2 sinh viên có nguy cơ điểm thấp. Nên ôn lại các chủ đề có quiz dưới 70%.",
+      "featureType": "teacher_class_analysis",
+      "createdAt": "2026-04-24T15:57:46.693Z"
+    },
+    {
+      "id": "ai_log_1777046265604_ahsx0u",
+      "userId": "u_lecturer_1",
+      "prompt": "class-analysis:cc_web301_k16",
+      "response": "AI phát hiện 1/2 sinh viên có nguy cơ điểm thấp. Nên ôn lại các chủ đề có quiz dưới 70%.",
+      "featureType": "teacher_class_analysis",
+      "createdAt": "2026-04-24T15:57:45.604Z"
+    },
+    {
+      "id": "ai_log_1777045519061_rwddat",
+      "userId": "u_student_1",
+      "prompt": "�n g� tu?n n�y",
+      "response": "AI Đại Nam: Với câu hỏi \"�n g� tu?n n�y\", mình gợi ý bạn liên hệ lại dữ liệu học tập hiện tại. GPA của bạn là 2.56/4.0. Dựa trên kết quả môn Cơ sở dữ liệu, bạn nên ôn lại các bài nền tảng và làm thêm quiz luyện tập trong tuần này.",
+      "featureType": "student_chat",
+      "createdAt": "2026-04-24T15:45:19.061Z"
+    }
+  ],
+  "activityLogs": [],
+  "teacherStudentNotes": [],
+  "studentLearningStatuses": [],
+  "teacherNotifications": [],
+  "studentAiAnalyses": [
+    {
+      "id": "student_ai_analysis_1777047738804_mk8auy",
+      "studentId": "u_student_1",
+      "teacherId": "u_lecturer_1",
+      "analysisSummary": "Sinh viên Nguyễn Văn A có 1 môn cần hỗ trợ. Tiến độ thấp nhất 0%, điểm trung bình hiện tại 6.4.",
+      "weakPoints": [
+        "Cơ sở dữ liệu: tiến độ 0%, điểm 5.8"
+      ],
+      "recommendations": [
+        "Nhắc hoàn thành bài học chưa xong",
+        "Giao thêm quiz luyện tập",
+        "Hẹn trao đổi 1-1 trong tuần",
+        "Gợi ý ôn lại tài liệu nền tảng"
+      ],
+      "riskLevel": "medium",
+      "createdAt": "2026-04-24T16:22:18.804Z"
+    }
+  ]
+}

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scholar Tech | Catalog giao diện Stitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --surface: rgba(255, 255, 255, 0.8);
+      --surface-soft: #edeeef;
+      --ink: #191c1d;
+      --muted: #424654;
+      --primary: #0040a1;
+      --primary-strong: #0056d2;
+      --secondary: #5b00df;
+      --secondary-soft: rgba(91, 0, 223, 0.08);
+      --shadow: 0 24px 60px rgba(25, 28, 29, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-sm: 999px;
+      --max-width: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(0, 86, 210, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 8%, rgba(91, 0, 223, 0.14), transparent 24%),
+        linear-gradient(180deg, #f6f8ff 0%, #f8f9fa 18%, #f8f9fa 100%);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .brand-copy h1,
+    .brand-copy p,
+    .hero-copy h2,
+    .hero-copy p,
+    .section-heading h3,
+    .section-heading p,
+    .stat-card strong,
+    .hero-panel h3,
+    .design-card h3,
+    .card-title {
+      margin: 0;
+    }
+    .page-shell {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 40px rgba(25, 28, 29, 0.06);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 64, 161, 0.95), rgba(91, 0, 223, 0.88));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      box-shadow: 0 18px 38px rgba(0, 64, 161, 0.24);
+    }
+
+    .brand-copy h1 {
+      font-family: "Manrope", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-copy p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .topbar-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 64, 161, 0.08);
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 28px;
+      padding: 56px 0 24px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      padding: 12px 0;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--primary);
+      border: 1px solid rgba(0, 64, 161, 0.09);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero-copy h2 {
+      margin-top: 22px;
+      font-family: "Manrope", sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 11ch;
+    }
+
+    .hero-copy p {
+      margin-top: 24px;
+      max-width: 62ch;
+      font-size: 1.04rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .action-primary,
+    .action-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .action-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 20px 40px rgba(0, 86, 210, 0.22);
+    }
+
+    .action-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(25, 28, 29, 0.08);
+    }
+
+    .hero-note {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .mini-metric,
+    .stat-card,
+    .toolbar,
+    .design-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 18px 32px rgba(25, 28, 29, 0.05);
+    }
+
+    .mini-metric {
+      padding: 16px 18px;
+      border-radius: 20px;
+    }
+
+    .mini-metric strong {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .mini-metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.76)),
+        linear-gradient(135deg, rgba(0, 64, 161, 0.1), rgba(91, 0, 223, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      box-shadow: var(--shadow);
+      min-height: 100%;
+    }
+
+    .hero-panel::before,
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-panel::before {
+      width: 220px;
+      height: 220px;
+      right: -88px;
+      top: -86px;
+      background: radial-gradient(circle, rgba(91, 0, 223, 0.2), transparent 70%);
+    }
+
+    .hero-panel::after {
+      width: 180px;
+      height: 180px;
+      left: -72px;
+      bottom: -72px;
+      background: radial-gradient(circle, rgba(0, 86, 210, 0.18), transparent 70%);
+    }
+
+    .hero-panel-header,
+    .section-heading,
+    .toolbar-main,
+    .card-meta,
+    .card-actions,
+    .footer {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .hero-panel-header {
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel-header span,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .hero-panel-header span {
+      color: var(--secondary);
+      background: var(--secondary-soft);
+    }
+
+    .hero-panel h3 {
+      position: relative;
+      z-index: 1;
+      margin-top: 24px;
+      font-family: "Manrope", sans-serif;
+      font-size: 1.95rem;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .hero-panel p,
+    .section-heading p,
+    .card-description,
+    .design-card p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .hero-panel-list,
+    .design-list {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-panel-list li,
+    .design-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin-top: 6px;
+    }
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .stats,
+    .catalog-grid,
+    .design-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .stat-card,
+    .design-card,
+    .toolbar,
+    .screen-card {
+      border-radius: 28px;
+    }
+
+    .stat-card,
+    .design-card,
+    .toolbar,
+    .screen-card,
+    .card-content,
+    .card-header {
+      display: grid;
+    }
+
+    .stat-card {
+      padding: 24px;
+    }
+
+    .stat-card span {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 22px;
+      font-family: "Manrope", sans-serif;
+      font-size: 2rem;
+      letter-spacing: -0.05em;
+    }
+
+    .section-heading {
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-heading h3,
+    .design-card h3 {
+      font-family: "Manrope", sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    .section-heading h3 {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+    }
+
+    .toolbar {
+      padding: 22px;
+    }
+
+    .toolbar-main {
+      align-items: center;
+    }
+
+    .result-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .searchbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 16px;
+      border-radius: 20px;
+      background: var(--surface-soft);
+    }
+
+    .searchbox input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .filters,
+    .tag-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .filter-chip {
+      border: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: #f2f4f7;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .filter-chip.active,
+    .open-link {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 16px 28px rgba(0, 64, 161, 0.2);
+    }
+
+    .catalog-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .screen-card {
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 20px 42px rgba(25, 28, 29, 0.06);
+      grid-template-rows: auto 1fr;
+    }
+
+    .screen-visual {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(0, 64, 161, 0.08), rgba(91, 0, 223, 0.08));
+    }
+
+    .screen-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-gradient {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+    .card-content {
+      gap: 16px;
+      padding: 22px;
+    }
+
+    .card-header {
+      gap: 10px;
+    }
+
+    .card-meta {
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .card-meta code {
+      font-family: "Inter", sans-serif;
+      font-size: 0.79rem;
+      color: var(--primary);
+      background: rgba(0, 64, 161, 0.08);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      overflow-wrap: anywhere;
+    }
+
+    .card-title {
+      font-family: "Manrope", sans-serif;
+      font-size: 1.34rem;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+
+    .card-description {
+      font-size: 0.96rem;
+    }
+
+    .tag {
+      background: #f3f4f5;
+      color: var(--muted);
+    }
+
+    .card-actions {
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .open-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+    }
+
+    .secondary-link,
+    .design-link {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 42px 24px;
+      text-align: center;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      border: 1px dashed rgba(25, 28, 29, 0.12);
+    }
+
+    .design-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .design-card {
+      padding: 28px;
+    }
+
+    .design-card h3 {
+      font-size: 1.8rem;
+    }
+
+    .footer {
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 18px 0 8px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .stats,
+      .catalog-grid,
+      .design-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .design-grid,
+      .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        width: min(calc(100% - 20px), var(--max-width));
+        padding-top: 12px;
+      }
+
+      .topbar,
+      .section-heading,
+      .footer,
+      .card-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-meta,
+      .card-meta {
+        justify-content: flex-start;
+      }
+
+      .stats,
+      .catalog-grid,
+      .hero-note,
+      .design-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h2 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">ST</div>
+        <div class="brand-copy">
+          <h1>Scholar Tech Stitch Catalog</h1>
+          <p>Tổng hợp toàn bộ prototype xuất từ các folder Stitch trong workspace này.</p>
+        </div>
+      </div>
+      <div class="topbar-meta">
+        <span class="meta-pill">16 prototypes</span>
+        <span class="meta-pill">5 nhóm màn hình</span>
+        <span class="meta-pill">HTML tĩnh + preview ảnh</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="hero-kicker">Digital Atheneum / Scholar Tech</span>
+        <h2>Duyệt nhanh toàn bộ giao diện Stitch theo từng folder.</h2>
+        <p>
+          Trang này gom lại toàn bộ export hiện có thành một web catalog hoàn chỉnh: có phân nhóm,
+          tìm kiếm, preview bằng `screen.png`, và link thẳng tới `code.html` của từng prototype.
+          Mục tiêu là để bạn rà soát thiết kế nhanh, không phải đi mò từng thư mục con.
+        </p>
+        <div class="hero-actions">
+          <a class="action-primary" href="#catalog">Mở catalog</a>
+          <a class="action-secondary" href="stitch_ai_h_c_t_p_h_s/index.html">Test luồng quay về từ prototype</a>
+        </div>
+        <div class="hero-note">
+          <div class="mini-metric">
+            <strong>100%</strong>
+            <span>Dùng trực tiếp từ folder Stitch hiện có, không cần build tool riêng.</span>
+          </div>
+          <div class="mini-metric">
+            <strong>01</strong>
+            <span>Điểm vào chung cho toàn bộ mẫu giao diện trong repo.</span>
+          </div>
+          <div class="mini-metric">
+            <strong>5 nhóm</strong>
+            <span>Xác thực, giảng viên, báo cáo AI, ngoại tuyến, sinh viên.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="hero-panel-header">
+          <span>Design System</span>
+          <span>Scholar Tech</span>
+        </div>
+        <h3>The Digital Atheneum.</h3>
+        <p>
+          Visual direction trong `DESIGN.md` ưu tiên cảm giác thư viện số hiện đại:
+          nhiều khoảng thở, layer mềm, glassmorphism nhẹ và typography tương phản cao.
+        </p>
+        <ul class="hero-panel-list">
+          <li>
+            <span class="bullet"></span>
+            <div>
+              <strong>No-line rule</strong>
+              <p>Phân tách bằng nền và độ sâu bề mặt, không dùng viền 1px cứng làm cấu trúc chính.</p>
+            </div>
+          </li>
+          <li>
+            <span class="bullet"></span>
+            <div>
+              <strong>Dual typography</strong>
+              <p>`Manrope` cho headline kiến trúc, `Inter` cho phần nội dung và dữ liệu dài.</p>
+            </div>
+          </li>
+          <li>
+            <span class="bullet"></span>
+            <div>
+              <strong>Layered surfaces</strong>
+              <p>Dùng chênh lệch tông nền và bóng ambient để tạo nhịp thị giác cho dashboard học thuật.</p>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </section>
+    <section class="section">
+      <div class="stats">
+        <article class="stat-card">
+          <span>Màn hình thực tế có `code.html` và `screen.png` để preview.</span>
+          <strong>16</strong>
+        </article>
+        <article class="stat-card">
+          <span>Folder tài liệu thiết kế riêng biệt dùng làm guideline hệ thống.</span>
+          <strong>01</strong>
+        </article>
+        <article class="stat-card">
+          <span>Trạng thái hiện tại: chạy local bằng server tĩnh, mở được ngay trên trình duyệt.</span>
+          <strong>Live</strong>
+        </article>
+        <article class="stat-card">
+          <span>Trục nội dung chính: auth, faculty, reports, offline learning, student portal.</span>
+          <strong>5</strong>
+        </article>
+      </div>
+    </section>
+    <section class="section" id="catalog">
+      <div class="section-heading">
+        <div>
+          <h3>Catalog prototype</h3>
+          <p>
+            Bộ lọc bên dưới hoạt động ngay trên client. Bạn có thể tìm theo tên màn hình, category,
+            tag hoặc slug folder để mở đúng prototype cần xem.
+          </p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="toolbar-main">
+          <div class="result-meta">
+            <span>Kết quả hiển thị: <strong id="resultCount">16</strong></span>
+            <span>Filter hiện tại: <strong id="activeFilterLabel">Tất cả</strong></span>
+          </div>
+          <label class="searchbox" for="searchInput">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21L15.8 15.8M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <input id="searchInput" type="search" placeholder="Tìm theo tên màn hình, tag hoặc folder">
+          </label>
+        </div>
+        <div class="filters" id="filterBar"></div>
+      </div>
+
+      <div class="catalog-grid" id="catalogGrid"></div>
+    </section>
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <h3>Design reference</h3>
+          <p>
+            `scholar_tech_system/DESIGN.md` là guideline gốc cho ngôn ngữ hình ảnh của bộ mẫu này.
+            Tôi đã giữ đúng tinh thần đó khi làm lại trang catalog: nhẹ, nhiều layer và rõ cấu trúc.
+          </p>
+        </div>
+      </div>
+
+      <div class="design-grid">
+        <article class="design-card">
+          <h3>Nguyên tắc đã bám theo</h3>
+          <ul class="design-list">
+            <li>
+              <span class="bullet"></span>
+              <div>
+                <strong>Editorial spacing</strong>
+                <p>Khoảng trắng lớn, headline lớn, layout bất đối xứng nhẹ thay cho grid cứng kiểu admin truyền thống.</p>
+              </div>
+            </li>
+            <li>
+              <span class="bullet"></span>
+              <div>
+                <strong>Glass and gradient</strong>
+                <p>Các panel chính dùng nền bán trong suốt và gradient xanh lam sang tím để giữ chất công nghệ của Atheneum.</p>
+              </div>
+            </li>
+            <li>
+              <span class="bullet"></span>
+              <div>
+                <strong>Surface hierarchy</strong>
+                <p>Card trắng nổi trên nền xám rất nhạt, không cần kẻ line dày để vẫn phân tầng rõ.</p>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="design-card">
+          <h3>Folder tài liệu</h3>
+          <p>
+            Nếu cần đào sâu visual system hoặc tiếp tục đồng bộ homepage với các prototype bên trong,
+            bạn có thể dùng thẳng file guideline hiện có trong repo.
+          </p>
+          <a class="design-link" href="stitch_ai_h_c_t_p_h_s/scholar_tech_system/DESIGN.md">
+            Mở `scholar_tech_system/DESIGN.md`
+          </a>
+          <p>
+            Ngoài ra tôi đã thêm `stitch_ai_h_c_t_p_h_s/index.html` làm điểm neo trung gian để các link
+            `../index.html` trong prototype không còn rơi vào đường dẫn chết.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Scholar Tech Stitch Catalog chạy trực tiếp trên static server local.</span>
+      <span>Entry point: `index.html`</span>
+    </footer>
+  </div>
+
+  <script>
+    const screens = [
+      { folder: "ng_nh_p_gi_ng_vi_n_lu_ng_b_o_m_t_2fa", title: "Đăng nhập giảng viên", category: "Xác thực", variant: "Auth", description: "Điểm vào chính cho giảng viên với cấu trúc tập trung, rõ luồng đăng nhập và bảo mật.", tags: ["login", "faculty", "entry"] },
+      { folder: "x_c_th_c_2_l_p_k_t_n_i_dashboard_gi_ng_vi_n", title: "Xác thực hai lớp", category: "Xác thực", variant: "Security", description: "Bước xác minh bổ sung cho dashboard giảng viên, phù hợp với luồng đăng nhập có độ tin cậy cao.", tags: ["2fa", "security", "vault"] },
+      { folder: "b_ng_i_u_khi_n_gi_ng_vi_n_lu_ng_ho_t_ng_1", title: "Bảng điều khiển giảng viên 01", category: "Giảng viên", variant: "Dashboard", description: "Bản thể hiện tập trung vào tổng quan giảng dạy, chỉ số lớp học và danh sách công việc cần xử lý.", tags: ["dashboard", "faculty", "overview"] },
+      { folder: "b_ng_i_u_khi_n_gi_ng_vi_n_lu_ng_ho_t_ng_2", title: "Bảng điều khiển giảng viên 02", category: "Giảng viên", variant: "Dashboard", description: "Biến thể thứ hai của portal giảng viên với nhịp thông tin và bố cục thẻ khác so với bản 01.", tags: ["dashboard", "faculty", "variant"] },
+      { folder: "b_ng_i_u_khi_n_gi_ng_vi_n_to_n_di_n", title: "Bảng điều khiển giảng viên toàn diện", category: "Giảng viên", variant: "Portal", description: "Portal đầy đủ hơn cho giảng viên, phù hợp để xem trạng thái lớp, thông báo và công cụ hệ thống.", tags: ["portal", "faculty", "system"] },
+      { folder: "qu_n_l_l_p_h_c_chi_ti_t_t_ng_t_c", title: "Quản lý lớp học chi tiết", category: "Giảng viên", variant: "Operations", description: "Màn hình điều hành lớp học với AI Insights, dữ liệu học tập và các thao tác tác vụ ngay trên một canvas.", tags: ["class", "operations", "insights"] },
+      { folder: "b_o_c_o_t_ng_k_t_h_c_k_gi_ng_vi_n_1", title: "Báo cáo tổng kết học kỳ 01", category: "Báo cáo và AI", variant: "Report", description: "Báo cáo học kỳ cho giảng viên với hướng trình bày thiên về dữ liệu tổng hợp và kết luận học vụ.", tags: ["report", "semester", "faculty"] },
+      { folder: "b_o_c_o_t_ng_k_t_h_c_k_gi_ng_vi_n_2", title: "Báo cáo tổng kết học kỳ 02", category: "Báo cáo và AI", variant: "Report", description: "Biến thể thứ hai của báo cáo tổng kết học kỳ, thích hợp để so sánh cách trình bày giữa các export.", tags: ["report", "summary", "variant"] },
+      { folder: "t_y_ch_nh_ti_u_ch_b_o_c_o_ai_gi_ng_vi_n_1", title: "Tùy chỉnh tiêu chí báo cáo AI 01", category: "Báo cáo và AI", variant: "AI Criteria", description: "Giao diện cấu hình tiêu chí cho AI report, tập trung vào biểu mẫu, bộ lọc và trọng số phân tích.", tags: ["ai", "criteria", "settings"] },
+      { folder: "t_y_ch_nh_ti_u_ch_b_o_c_o_ai_gi_ng_vi_n_2", title: "Tùy chỉnh tiêu chí báo cáo AI 02", category: "Báo cáo và AI", variant: "AI Criteria", description: "Phiên bản còn lại của màn hình AI criteria để bạn đối chiếu cách tổ chức controls và hierarchy.", tags: ["ai", "filters", "variant"] },
+      { folder: "qu_n_l_h_c_t_p_ngo_i_tuy_n_atheneum_1", title: "Quản lý học tập ngoại tuyến 01", category: "Ngoại tuyến", variant: "Offline Center", description: "Offline center của Atheneum cho học tập đồng bộ ngoại tuyến và theo dõi trạng thái dữ liệu.", tags: ["offline", "sync", "atheneum"] },
+      { folder: "qu_n_l_h_c_t_p_ngo_i_tuy_n_atheneum_2", title: "Quản lý học tập ngoại tuyến 02", category: "Ngoại tuyến", variant: "Offline Center", description: "Biến thể thứ hai của khu vực học tập ngoại tuyến với nhấn mạnh vào đồng bộ và điều phối thiết bị.", tags: ["offline", "center", "sync"] },
+      { folder: "b_ng_x_p_h_ng_h_c_t_p_ngo_i_tuy_n_1", title: "Bảng xếp hạng học tập ngoại tuyến 01", category: "Ngoại tuyến", variant: "Leaderboard", description: "Leaderboard ngoại tuyến với tinh thần gamification cho môi trường học tập không kết nối liên tục.", tags: ["leaderboard", "offline", "ranking"] },
+      { folder: "b_ng_x_p_h_ng_h_c_t_p_ngo_i_tuy_n_2", title: "Bảng xếp hạng học tập ngoại tuyến 02", category: "Ngoại tuyến", variant: "Leaderboard", description: "Biến thể thứ hai của bảng xếp hạng để so sánh mức độ nhấn mạnh vào thành tích và cộng đồng.", tags: ["leaderboard", "gamification", "variant"] },
+      { folder: "dashboard_sinh_vi_n_k_t_n_i_c_i_t_nh_c_nh_1", title: "Dashboard sinh viên và cố vấn 01", category: "Sinh viên", variant: "Student Portal", description: "Dashboard hướng tới trải nghiệm sinh viên và cố vấn học tập với AI làm lớp hỗ trợ trung tâm.", tags: ["student", "advisor", "dashboard"] },
+      { folder: "dashboard_sinh_vi_n_k_t_n_i_c_i_t_nh_c_nh_2", title: "Dashboard sinh viên và cố vấn 02", category: "Sinh viên", variant: "Student Portal", description: "Biến thể còn lại của portal sinh viên, hữu ích để so sánh hierarchy và độ đậm của giao diện.", tags: ["student", "portal", "variant"] },
+    ];
+
+    const categoryOrder = ["Tất cả", "Xác thực", "Giảng viên", "Báo cáo và AI", "Ngoại tuyến", "Sinh viên"];
+    const filterBar = document.getElementById("filterBar");
+    const searchInput = document.getElementById("searchInput");
+    const catalogGrid = document.getElementById("catalogGrid");
+    const resultCount = document.getElementById("resultCount");
+    const activeFilterLabel = document.getElementById("activeFilterLabel");
+    let activeFilter = "Tất cả";
+
+    function normalizeText(value) {
+      return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    function buildFilters() {
+      filterBar.innerHTML = "";
+      categoryOrder.forEach((category) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "filter-chip" + (category === activeFilter ? " active" : "");
+        button.textContent = category;
+        button.addEventListener("click", () => {
+          activeFilter = category;
+          buildFilters();
+          renderCatalog();
+        });
+        filterBar.appendChild(button);
+      });
+    }
+
+    function matchesScreen(screen, query) {
+      if (!query) return true;
+      const haystack = normalizeText([screen.title, screen.category, screen.variant, screen.description, screen.folder, screen.tags.join(" ")].join(" "));
+      return haystack.includes(query);
+    }
+
+    function renderCatalog() {
+      const query = normalizeText(searchInput.value.trim());
+      const filtered = screens.filter((screen) => (activeFilter === "Tất cả" || screen.category === activeFilter) && matchesScreen(screen, query));
+      resultCount.textContent = String(filtered.length);
+      activeFilterLabel.textContent = activeFilter;
+      catalogGrid.innerHTML = "";
+
+      if (!filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "Không có màn hình nào khớp với bộ lọc hiện tại.";
+        catalogGrid.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach((screen) => {
+        const article = document.createElement("article");
+        article.className = "screen-card";
+        article.innerHTML = `
+          <div class="screen-visual">
+            <img src="stitch_ai_h_c_t_p_h_s/${screen.folder}/screen.png" alt="${screen.title}">
+            <span class="card-gradient">${screen.variant}</span>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-meta">
+                <span>${screen.category}</span>
+                <code>${screen.folder}</code>
+              </div>
+              <h4 class="card-title">${screen.title}</h4>
+              <p class="card-description">${screen.description}</p>
+            </div>
+            <div class="tag-row">${screen.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>
+            <div class="card-actions">
+              <a class="open-link" href="stitch_ai_h_c_t_p_h_s/${screen.folder}/code.html">Mở prototype</a>
+              <a class="secondary-link" href="stitch_ai_h_c_t_p_h_s/${screen.folder}/">Xem folder</a>
+            </div>
+          </div>
+        `;
+        catalogGrid.appendChild(article);
+      });
+    }
+
+    searchInput.addEventListener("input", renderCatalog);
+    buildFilters();
+    renderCatalog();
+  </script>
+</body>
+</html>

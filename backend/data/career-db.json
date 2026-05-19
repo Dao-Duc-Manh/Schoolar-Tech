@@ -1,0 +1,132 @@
+{
+  "careerProfiles": [
+    {
+      "id": "career_profile_1777023415466_94qdab",
+      "studentId": "u_student_1",
+      "careerObjective": "",
+      "desiredPosition": "",
+      "desiredIndustry": "",
+      "desiredLocation": "",
+      "shortTermGoal": "",
+      "longTermGoal": "",
+      "portfolioUrl": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "personalWebsite": "",
+      "cvFileUrl": "",
+      "aiSummary": "",
+      "aiSuggestions": null,
+      "certificates": [],
+      "achievements": [],
+      "status": "Hired",
+      "consentToShare": true,
+      "allowEmployerView": true,
+      "showGpa": true,
+      "createdAt": "2026-04-24T09:36:55.466Z",
+      "updatedAt": "2026-04-24T15:52:17.355Z",
+      "submittedAt": "2026-04-24T09:36:55.517Z",
+      "academicScore": 86,
+      "skillScore": 14,
+      "certificateScore": 0,
+      "achievementScore": 0,
+      "experienceScore": 0,
+      "profileCompletionScore": 11,
+      "careerReadinessScore": 22
+    }
+  ],
+  "careerSkills": [
+    {
+      "id": "career-skills_1777023415506_ng2u9w",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "createdAt": "2026-04-24T09:36:55.506Z",
+      "updatedAt": "2026-04-24T09:36:55.506Z",
+      "skillName": "React",
+      "skillType": "technical",
+      "level": "T?t"
+    }
+  ],
+  "studentProjects": [],
+  "studentExperiences": [],
+  "careerReviews": [],
+  "jobs": [
+    {
+      "id": "job_frontend_intern_1",
+      "companyName": "Scholar Tech Partner",
+      "title": "Frontend Intern",
+      "industry": "Công nghệ phần mềm",
+      "description": "Tham gia phát triển giao diện web giáo dục bằng React.",
+      "requirements": "Nắm HTML, CSS, JavaScript, React cơ bản; có tinh thần học hỏi.",
+      "requiredSkills": [
+        "React",
+        "JavaScript",
+        "CSS"
+      ],
+      "requiredGpa": 2.6,
+      "location": "Hồ Chí Minh",
+      "jobType": "internship",
+      "deadline": "2026-05-24",
+      "status": "active",
+      "createdBy": "system",
+      "createdAt": "2026-04-24T09:16:40.376Z",
+      "updatedAt": "2026-04-24T09:16:40.376Z"
+    }
+  ],
+  "jobMatches": [],
+  "careerSupportLogs": [
+    {
+      "id": "career_log_1777045937355_xfgn3k",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_admin_1",
+      "action": "status.Hired",
+      "note": "Cập nhật sang Hired",
+      "createdAt": "2026-04-24T15:52:17.355Z"
+    },
+    {
+      "id": "career_log_1777045936495_d4h8m8",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_admin_1",
+      "action": "status.Interviewing",
+      "note": "Cập nhật sang Interviewing",
+      "createdAt": "2026-04-24T15:52:16.495Z"
+    },
+    {
+      "id": "career_log_1777045935569_no52qz",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_admin_1",
+      "action": "status.Approved",
+      "note": "Cập nhật sang Approved",
+      "createdAt": "2026-04-24T15:52:15.569Z"
+    },
+    {
+      "id": "career_log_1777045934545_axrzwk",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_admin_1",
+      "action": "status.Reviewing",
+      "note": "Cập nhật sang Reviewing",
+      "createdAt": "2026-04-24T15:52:14.545Z"
+    },
+    {
+      "id": "career_log_1777045933240_ty497v",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_admin_1",
+      "action": "status.Submitted",
+      "note": "Cập nhật sang Submitted",
+      "createdAt": "2026-04-24T15:52:13.240Z"
+    },
+    {
+      "id": "career_log_1777023415517_rxfywf",
+      "studentId": "u_student_1",
+      "careerProfileId": "career_profile_1777023415466_94qdab",
+      "officerId": "u_student_1",
+      "action": "student.submit",
+      "note": "Sinh viên gửi hồ sơ lên nhà trường.",
+      "createdAt": "2026-04-24T09:36:55.517Z"
+    }
+  ]
+}
