@@ -1,32 +1,35 @@
 import axios from 'axios';
 
-// VITE_API_URL có thể được set dư '/api' (ví dụ http://localhost:3000/api)
-// Trong khi các request lại dùng path bắt đầu bằng '/api/...', dẫn tới '/api/api/...'
-const API_URL_RAW = import.meta.env.VITE_API_URL;
-const API_URL = String(API_URL_RAW || '').replace(/\/+$/,'').replace(/\/api\/$/, '/').replace(/\/api$/, '');
+// Khi dev: Vite proxy /api → http://localhost:3000/api
+// Khi production: set VITE_API_URL=https://your-backend.com
+const API_BASE = import.meta.env.VITE_API_URL
+  ? String(import.meta.env.VITE_API_URL).replace(/\/+$/, '')
+  : '';
 
-// Create axios instance
 const apiClient = axios.create({
-  baseURL: API_URL,
-  withCredentials: true,
+  baseURL: API_BASE,
+  withCredentials: true, // gửi cookie scholartech_session
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+// Gửi token từ sessionStorage vào header nếu có (fallback khi cookie không hoạt động)
 apiClient.interceptors.request.use((config) => {
-  // backend đang dùng cookie `scholartech_session` thay cho accessToken header
-  // (để tránh gửi Bearer không tồn tại gây 401)
+  const token = sessionStorage.getItem('accessToken');
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
   return config;
 });
 
-// Handle responses
+// Xử lý lỗi toàn cục
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       sessionStorage.removeItem('accessToken');
-      const publicPaths = ['/login', '/register'];
+      const publicPaths = ['/login', '/register', '/verify-2fa', '/2fa-auth'];
       if (!publicPaths.includes(window.location.pathname)) {
         window.location.href = '/login';
       }
