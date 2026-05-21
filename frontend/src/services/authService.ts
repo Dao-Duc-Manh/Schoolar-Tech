@@ -22,6 +22,7 @@ interface LoginResponse {
   data: {
     user: AuthUser;
     accessToken?: string;
+    token?: string;
     redirectPath: string;
   };
   message?: string;
@@ -42,7 +43,11 @@ export const authService = {
   },
 
   async logout() {
-    await apiClient.post('/api/auth/logout');
+    try {
+      await apiClient.post('/api/auth/logout');
+    } catch {
+      // Bỏ qua lỗi logout - vẫn xóa session local
+    }
   },
 
   async getCurrentUser(): Promise<MeResponse> {

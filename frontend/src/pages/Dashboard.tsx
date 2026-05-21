@@ -187,7 +187,10 @@ export function DashboardPage() {
               </div>
             </div>
 
-            <button className="w-full mt-8 py-3 border-2 border-secondary text-secondary font-bold rounded-xl hover:bg-secondary hover:text-white transition-all">
+            <button
+              onClick={() => navigate('/semester-report')}
+              className="w-full mt-8 py-3 border-2 border-secondary text-secondary font-bold rounded-xl hover:bg-secondary hover:text-white transition-all"
+            >
               Phân tích chuyên sâu
             </button>
           </div>
@@ -326,6 +329,7 @@ function StudentDashboard() {
   ]);
 
   const [weeklyProgress] = useState([40, 70, 90, 60, 85, 30, 15]);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const firstName = user?.fullName?.trim().split(/\s+/)[0] || 'Sinh viên';
 
   const finalizeRoadmapAction = (response: RoadmapGenerateResponse | null) => {
@@ -460,7 +464,10 @@ function StudentDashboard() {
               </span>
               {isLoading ? 'Đang tạo lộ trình...' : 'Bắt đầu Lộ trình Gợi ý'}
             </button>
-            <button className="bg-white/10 backdrop-blur-md text-white px-6 py-2.5 rounded-full font-bold text-sm border border-white/20 hover:bg-white/20 transition-all">
+            <button
+              onClick={() => navigate('/semester-report')}
+              className="bg-white/10 backdrop-blur-md text-white px-6 py-2.5 rounded-full font-bold text-sm border border-white/20 hover:bg-white/20 transition-all"
+            >
               Xem Phân tích
             </button>
           </div>
@@ -477,16 +484,22 @@ function StudentDashboard() {
           <div className="flex items-center justify-between mb-6">
             <h4 className="font-headline font-bold text-2xl tracking-tight">Lộ trình Học tập Hiện tại</h4>
             <div className="flex gap-2">
-              <button className="p-2 rounded-lg bg-surface-container-high hover:bg-primary hover:text-white transition-all">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-surface-container-high hover:bg-primary hover:text-white'}`}
+              >
                 <span className="material-symbols-outlined">grid_view</span>
               </button>
-              <button className="p-2 rounded-lg bg-surface-container-high hover:bg-primary hover:text-white transition-all">
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-surface-container-high hover:bg-primary hover:text-white'}`}
+              >
                 <span className="material-symbols-outlined">list</span>
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-3 gap-6" : "flex flex-col gap-4"}>
             {courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
@@ -545,7 +558,10 @@ function StudentDashboard() {
                 <span className="text-xs font-semibold">{name}</span>
               </div>
             ))}
-            <button className="w-14 h-14 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+            <button
+              onClick={() => setToast({ type: 'info', title: 'Tính năng học nhóm', description: 'Tính năng mời thành viên đang được phát triển.' })}
+              className="w-14 h-14 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors"
+            >
               <span className="material-symbols-outlined">add</span>
             </button>
           </div>
@@ -555,7 +571,10 @@ function StudentDashboard() {
               <p className="text-sm font-bold text-tertiary-600">Bắt đầu Học nhóm</p>
               <p className="text-xs text-on-surface-variant">Phòng thí nghiệm Cơ học Lượng tử - 15:00</p>
             </div>
-            <button className="bg-tertiary-600 text-white px-4 py-2 rounded-xl text-xs font-bold">
+            <button
+              onClick={() => setToast({ type: 'info', title: 'Đang tham gia phòng học nhóm...', description: 'Tính năng phòng học nhóm đang được phát triển.' })}
+              className="bg-tertiary-600 text-white px-4 py-2 rounded-xl text-xs font-bold"
+            >
               Tham gia Phòng
             </button>
           </div>
@@ -586,6 +605,7 @@ function StudentDashboard() {
 
 // Course Card Component
 function CourseCard({ course }: { course: any }) {
+  const navigate = useNavigate();
   const colorClass =
     course.color === 'primary'
       ? 'bg-primary-600'
@@ -632,6 +652,7 @@ function CourseCard({ course }: { course: any }) {
           </p>
         </div>
         <button
+          onClick={() => navigate('/student/learning')}
           className={`w-full py-2.5 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all ${
             course.color === 'primary'
               ? 'bg-primary-600'

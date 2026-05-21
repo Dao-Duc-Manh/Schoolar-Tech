@@ -1067,6 +1067,8 @@ app.post('/api/auth/login', rateLimitLogin, async (req, res) => {
       success: true,
       data: {
         user: toPublicUser(user),
+        token,          // để frontend lưu vào sessionStorage (fallback cho Authorization header)
+        accessToken: token,
         redirectPath: getDashboardPath(user.role),
       },
       message: 'Đăng nhập thành công.',

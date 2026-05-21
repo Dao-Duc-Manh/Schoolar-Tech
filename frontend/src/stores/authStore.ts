@@ -23,6 +23,14 @@ const normalizeUser = (user: AuthUser): AuthUser => ({
   email: user.email || '',
 });
 
+/** Trả về đường dẫn dashboard mặc định theo role */
+const getDefaultRedirect = (role?: UserRole | null): string => {
+  if (role === 'admin' || role === 'super_admin') return '/admin/dashboard';
+  if (role === 'career_officer') return '/career/dashboard';
+  if (role === 'lecturer' || role === 'teacher') return '/lecturer/dashboard';
+  return '/student/dashboard';
+};
+
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   isAuthenticated: false,
@@ -37,32 +45,39 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const response = await authService.login({ identifier, password });
 
-      // Backend trả token theo data.token (không phải accessToken)
-      const tokenFromBackend = (response as any)?.data?.token ?? (response as any)?.data?.accessToken;
-      if (tokenFromBackend) {
-        sessionStorage.setItem('accessToken', tokenFromBackend);
+      // Backend có thể trả token theo field "token" hoặc "accessToken"
+      const token = response?.data?.token ?? response?.data?.accessToken;
+      if (token) {
+        sessionStorage.setItem('accessToken', token);
       }
 
-      const user = normalizeUser((response as any)?.data?.user);
+      const rawUser = (response as any)?.data?.user;
+      if (!rawUser) throw new Error('Không nhận được thông tin người dùng.');
+
+      const user = normalizeUser(rawUser);
+      // Dùng redirectPath từ backend nếu có, không thì tự tính theo role
+      const redirectPath = response?.data?.redirectPath || getDefaultRedirect(user.role);
 
       set({
         user,
         isAuthenticated: true,
         isLoading: false,
-        // backend hiện tại không trả redirectPath
-        redirectPath: (response as any)?.data?.redirectPath ?? null,
+        redirectPath,
       });
-      return (response as any)?.data?.redirectPath ?? null;
 
+      return redirectPath;
     } catch (error: any) {
-      const message = error.response?.data?.message || 'Thông tin đăng nhập không hợp lệ.';
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        'Thông tin đăng nhập không hợp lệ.';
       set({ error: message, isLoading: false, user: null, isAuthenticated: false, redirectPath: null });
       throw error;
     }
   },
 
   register: async (_fullName, _email, _password) => {
-    const message = 'Đăng ký công khai không khả dụng trong môi trường hiện tại.';
+    const message = 'Đăng ký công khai không khả dụng. Vui lòng liên hệ bộ phận học vụ.';
     set({ error: message, isLoading: false });
     throw new Error(message);
   },
@@ -77,17 +92,25 @@ export const useAuthStore = create<AuthStore>((set) => ({
   },
 
   initializeAuth: async () => {
+    // Chỉ thử restore session nếu có token trong sessionStorage hoặc cookie
+    const hasToken = !!sessionStorage.getItem('accessToken');
+    // Cookie-based auth vẫn thử ngay cả khi không có sessionStorage token
     set({ isLoading: true });
     try {
       const response = await authService.getCurrentUser();
+      const rawUser = response?.data?.user;
+      if (!rawUser) throw new Error('No user');
+
+      const user = normalizeUser(rawUser);
       set({
-        user: normalizeUser(response.data.user),
+        user,
         isAuthenticated: true,
         isLoading: false,
         error: null,
-        redirectPath: response.data.redirectPath,
+        redirectPath: response.data.redirectPath || getDefaultRedirect(user.role),
       });
     } catch {
+      if (hasToken) sessionStorage.removeItem('accessToken');
       set({ user: null, isAuthenticated: false, isLoading: false, error: null, redirectPath: null });
     }
   },
