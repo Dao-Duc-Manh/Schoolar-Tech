@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 // Mock data
 const studentData = {
@@ -96,7 +99,9 @@ const activities = [
 ];
 
 export default function StudentDashboard() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
+
 
   const getColorClass = (color: string) => {
     switch (color) {
@@ -138,12 +143,22 @@ export default function StudentDashboard() {
               </div>
             </div>
             <div className="flex gap-3">
-              <button className="p-2 hover:bg-gray-100 rounded-full">
+              <button
+                type="button"
+                className="p-2 hover:bg-gray-100 rounded-full"
+                onClick={() => navigate('/student/learning')}
+                aria-label="Notifications"
+              >
                 <span className="material-symbols-outlined text-gray-600">
                   notifications
                 </span>
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-full">
+              <button
+                type="button"
+                className="p-2 hover:bg-gray-100 rounded-full"
+                onClick={() => navigate('/settings')}
+                aria-label="Settings"
+              >
                 <span className="material-symbols-outlined text-gray-600">
                   settings
                 </span>
@@ -345,7 +360,11 @@ export default function StudentDashboard() {
                   Bạn cần hỗ trợ gì hôm nay? Tôi có thể giúp bạn lập kế hoạch học tập,
                   giải đáp thắc mắc về bài giảng.
                 </p>
-                <button className="w-full bg-white text-purple-700 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors">
+                <button
+                  type="button"
+                  className="w-full bg-white text-purple-700 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors"
+                  onClick={() => navigate('/student/learning')}
+                >
                   Bắt đầu chat
                 </button>
               </div>

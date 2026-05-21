@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+
 const mockTasks = [
   { id: 1, title: 'Nộp Báo cáo Thí nghiệm', subject: 'Cơ học Lượng tử', due: 'Hết hạn hôm nay', urgent: true },
   { id: 2, title: 'Bài tập Đọc', subject: 'Đạo đức trong AI', due: 'Còn 2 ngày', urgent: false },
   { id: 3, title: 'Ôn tập Giữa kỳ', subject: 'Đại số Tuyến tính', due: 'Còn 5 ngày', urgent: false },
 ];
+
 
 const mockCourses = [
   {
@@ -168,17 +170,13 @@ export default function StudentDashboardV2() {
                   </div>
                   <p className="text-[10px] text-gray-500 italic">Đã lưu từ phiên học trước</p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    // Mock: điều hướng tới trang làm bài tập tương ứng (cần có route thật)
-                    window.location.href = '/materials';
-                  }}
+                <a
+                  href="/student/learning"
                   className="w-full py-2.5 bg-blue-600 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all"
                 >
                   <span className="material-symbols-outlined text-sm">assignment</span>
                   Làm bài tập ngay
-                </button>
+                </a>
               </div>
             </div>
           ))}
