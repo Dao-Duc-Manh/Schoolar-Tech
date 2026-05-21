@@ -33,10 +33,13 @@ fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 app.use(cors({
   origin(origin, callback) {
     if (!origin) return callback(null, true);
+    // Cho phep localhost/127.0.0.1 bat ky port nao (Vite: 5173/5174, backend: 3000)
     const isAllowed = /^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+)(:\d+)?$/i.test(origin);
     return callback(null, isAllowed);
   },
   credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 }));
 
 app.use(express.json());
