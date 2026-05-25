@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useAuthStore } from '@/stores/authStore';
 import { useGenerateRoadmap } from '@/hooks/useGenerateRoadmap';
 import { RoadmapPreviewModal } from '@/components/Roadmap/RoadmapPreviewModal';
@@ -631,18 +632,19 @@ function CourseCard({ course }: { course: any }) {
             {course.progress >= 90 ? 'Sắp hoàn thành!' : 'Đã lưu từ phiên học trước'}
           </p>
         </div>
-        <button
-          className={`w-full py-2.5 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all ${
-            course.color === 'primary'
-              ? 'bg-primary-600'
-              : course.color === 'secondary'
-              ? 'bg-secondary-600'
-              : 'bg-tertiary-600'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">play_arrow</span>
-          Học tiếp
-        </button>
+          <Link
+            to="/materials"
+            className={`w-full py-2.5 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all ${
+              course.color === 'primary'
+                ? 'bg-primary-600'
+                : course.color === 'secondary'
+                ? 'bg-secondary-600'
+                : 'bg-tertiary-600'
+            }`}
+          >
+            <span className="material-symbols-outlined text-sm">play_arrow</span>
+            Học tiếp
+          </Link>
       </div>
     </div>
   );

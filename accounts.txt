@@ -1,0 +1,6 @@
+# Accounts configured for the project
+# Format (example):
+# username,email,password,role
+
+# TODO: Add real accounts here
+

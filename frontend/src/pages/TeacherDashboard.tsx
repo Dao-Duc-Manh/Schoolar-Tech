@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const mockTeacherData = {
   name: 'TS. Nguyễn Văn A',
@@ -148,9 +149,12 @@ export default function TeacherDashboard() {
                       style={{ width: `${cls.progress}%` }}
                     ></div>
                   </div>
-                  <button className="w-full py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all">
+                  <Link
+                    to="/class-management"
+                    className="w-full py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all block text-center"
+                  >
                     Quản lý lớp học
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
