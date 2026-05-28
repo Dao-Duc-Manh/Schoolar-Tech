@@ -21,7 +21,9 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    const defineModel = require(path.join(__dirname, file));
+    // Backward compatibility: model files are expected to export (sequelize, Sequelize) => Model
+    const model = defineModel(sequelize, Sequelize);
     db[model.name] = model;
   });
 

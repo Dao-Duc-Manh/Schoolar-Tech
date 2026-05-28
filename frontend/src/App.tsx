@@ -32,7 +32,8 @@ import AIReportSettingsV2Page from '@/pages/AIReportSettingsV2';
 import AdminPage from '@/pages/AdminPage';
 import RoadmapCurrentPage from '@/pages/RoadmapCurrent';
 import { DaiNamStudentLearningPage } from '@/pages/DaiNamStudentLearning';
-import { DaiNamTeacherCenterPage } from '@/pages/DaiNamTeacherCenter';
+import { TeacherLmsAssignmentsPage } from '@/pages/TeacherLmsAssignments';
+
 import { DaiNamAdminCenterPage } from '@/pages/DaiNamAdminCenter';
 
 type UserRole = 'admin' | 'super_admin' | 'lecturer' | 'teacher' | 'student' | 'career_officer';
@@ -209,7 +210,7 @@ function App() {
           path="/teacher/lms"
           element={
             <ProtectedRoute allowedRoles={['lecturer', 'teacher']}>
-              <DaiNamTeacherCenterPage />
+              <TeacherLmsAssignmentsPage />
             </ProtectedRoute>
           }
         />

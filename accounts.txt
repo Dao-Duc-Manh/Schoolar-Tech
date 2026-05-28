@@ -4,3 +4,18 @@
 
 # TODO: Add real accounts here
 
+Tài khoản sinh viên
+
+Email/ID: student1@school.edu.vn
+Mật khẩu: 123456
+Sau login sẽ vào /student/dashboard
+Tài khoản giảng viên
+
+Email/ID: lecturer1@school.edu.vn
+Mật khẩu: 123456
+Sau login sẽ vào /lecturer/dashboard
+Tài khoản quản trị
+
+Email/ID: admin1@school.edu.vn
+Mật khẩu: 123456
+Sau login sẽ vào /admin/dashboard
